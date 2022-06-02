@@ -2,17 +2,16 @@ package com.fadlurahmanf.starterappmvvm.di.component
 
 import android.content.Context
 import com.fadlurahmanf.starterappmvvm.BaseApp
-import com.fadlurahmanf.starterappmvvm.di.module.CoreModule
-import com.fadlurahmanf.starterappmvvm.di.module.ExampleModule
 import dagger.BindsInstance
 import dagger.Component
 
 
-@Component(modules = [ExampleModule::class, CoreModule::class])
+@Component(modules = [])
 interface ApplicationComponent {
     fun inject(app: BaseApp)
     fun exampleComponent():ExampleComponent.Factory
     fun coreComponent():CoreComponent.Factory
+    fun genreComponent():GenreComponent.Factory
 
     @Component.Factory
     interface Factory{

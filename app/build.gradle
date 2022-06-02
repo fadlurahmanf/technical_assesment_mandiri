@@ -17,6 +17,7 @@ android {
         multiDexEnabled true
 
         buildConfigField "String", "BASE_DEV_URL", "\"${devBaseUrl}\""
+        buildConfigField "String", "API_KEY", "\"${apiKey}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

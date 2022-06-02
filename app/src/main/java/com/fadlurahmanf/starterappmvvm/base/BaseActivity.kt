@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.fadlurahmanf.starterappmvvm.BaseApp
+import com.fadlurahmanf.starterappmvvm.di.component.ApplicationComponent
 import com.fadlurahmanf.starterappmvvm.ui.core.dialog.DefaultLoadingDialog
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -17,15 +19,24 @@ abstract class BaseActivity<VB:ViewBinding>(
     var inflate:InflateActivity<VB>
 ):AppCompatActivity() {
 
+    private lateinit var _appComponent:ApplicationComponent
+    val appComponent get() = _appComponent
+
+
     private var _binding:VB ?= null
     val binding get() = _binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        initComponent()
         inject()
         super.onCreate(savedInstanceState)
         setLayout()
         internalSetup()
         initSetup()
+    }
+
+    open fun initComponent(){
+        _appComponent = (applicationContext as BaseApp).applicationComponent
     }
 
     open fun internalSetup(){}

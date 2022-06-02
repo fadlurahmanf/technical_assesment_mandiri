@@ -1,9 +1,12 @@
 package com.fadlurahmanf.starterappmvvm.base.network
 
 import androidx.annotation.Nullable
-import com.bpp_app.module_payment_selector.data.interceptor.ContentTypeInterceptor
+import com.fadlurahmanf.starterappmvvm.data.interceptor.ContentTypeInterceptor
 import com.fadlurahmanf.starterappmvvm.BuildConfig
+import com.fadlurahmanf.starterappmvvm.data.interceptor.QueryInterceptor
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -21,6 +24,7 @@ abstract class BaseNetwork<T>() {
 
     open fun okHttpClientBuilder(builder: OkHttpClient.Builder): OkHttpClient.Builder{
         return builder.addInterceptor(loggingInterceptor())
+            .addInterceptor(QueryInterceptor())
             .addInterceptor(ContentTypeInterceptor())
     }
 
