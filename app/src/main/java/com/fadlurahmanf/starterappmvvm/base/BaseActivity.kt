@@ -4,12 +4,16 @@ package com.fadlurahmanf.starterappmvvm.base
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.fadlurahmanf.starterappmvvm.BaseApp
 import com.fadlurahmanf.starterappmvvm.di.component.ApplicationComponent
 import com.fadlurahmanf.starterappmvvm.ui.core.dialog.DefaultLoadingDialog
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
@@ -71,5 +75,13 @@ abstract class BaseActivity<VB:ViewBinding>(
             loadingDialog?.dismiss()
             loadingDialog = null
         }
+    }
+
+    fun showToast(message:String, long:Int?=null){
+        Toast.makeText(this, message, long?:Toast.LENGTH_SHORT).show()
+    }
+
+    fun showSnackBar(view:View, message:String, long:Int?=null){
+        Snackbar.make(view, message, long?:Snackbar.LENGTH_SHORT).show()
     }
 }

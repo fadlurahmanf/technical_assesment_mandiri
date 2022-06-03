@@ -3,8 +3,6 @@ package com.fadlurahmanf.starterappmvvm.ui.example.activity
 import androidx.work.*
 import com.fadlurahmanf.starterappmvvm.BaseApp
 import com.fadlurahmanf.starterappmvvm.base.BaseActivity
-import com.fadlurahmanf.starterappmvvm.base.BaseViewState
-import com.fadlurahmanf.starterappmvvm.base.STATE
 import com.fadlurahmanf.starterappmvvm.data.repository.example.ExampleRepository
 import com.fadlurahmanf.starterappmvvm.databinding.ActivityExampleBinding
 import com.fadlurahmanf.starterappmvvm.di.component.ExampleComponent
@@ -25,45 +23,11 @@ class ExampleActivity : BaseActivity<ActivityExampleBinding>(ActivityExampleBind
     override fun initSetup() {
         initObserver()
 
-        binding?.button1?.setOnClickListener {
-            viewModel.getTestimonialState()
-        }
+        binding?.button1?.setOnClickListener {}
     }
 
 
-    private fun initObserver() {
-//        viewModel.testimonialLoading.observe(this, { loading ->
-//            if (loading){
-//                showLoadingDialog()
-//            }else{
-//                dismissDialog()
-//            }
-//        })
-//
-//        viewModel.testimonial.observe(this, {
-//            Snackbar.make(binding!!.root, "RESULT : ${it.message}", Snackbar.LENGTH_LONG).show()
-//        })
-//
-//        viewModel.testimonialError.observeOnce(this, {
-//            Snackbar.make(binding!!.root, "RESULT : ${it?:""}", Snackbar.LENGTH_LONG).show()
-//        })
-
-        viewModel.exampleState.observe(this, {
-            when(it.state){
-                STATE.LOADING -> {
-                    showLoadingDialog()
-                }
-                STATE.SUCCESS -> {
-                    dismissDialog()
-                    Snackbar.make(binding!!.root, "RESULT : ${it.data?.message}", Snackbar.LENGTH_LONG).show()
-                }
-                STATE.FAILED -> {
-                    dismissDialog()
-                    Snackbar.make(binding!!.root, "RESULT : ${it.error}", Snackbar.LENGTH_LONG).show()
-                }
-            }
-        })
-    }
+    private fun initObserver() {}
 
 
     override fun inject() {

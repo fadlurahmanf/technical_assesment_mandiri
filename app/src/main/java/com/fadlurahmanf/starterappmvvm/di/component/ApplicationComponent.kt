@@ -11,7 +11,7 @@ interface ApplicationComponent {
     fun inject(app: BaseApp)
     fun exampleComponent():ExampleComponent.Factory
     fun coreComponent():CoreComponent.Factory
-    fun genreComponent():GenreComponent.Factory
+    fun movieComponent():MovieComponent.Factory
 
     @Component.Factory
     interface Factory{

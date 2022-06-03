@@ -14,15 +14,15 @@
         android:theme="@style/Theme.StarterAppMvvm"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.genre.GenreActivity"
+            android:name=".ui.SplashActivity"
             android:exported="false" />
         <activity
             android:name=".ui.example.activity.ExampleActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.genre.GenreActivity"
             android:exported="true"
-            android:theme="@style/Theme.StarterAppMvvm.NoActionBar">
+            android:theme="@style/NoActionBar1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
