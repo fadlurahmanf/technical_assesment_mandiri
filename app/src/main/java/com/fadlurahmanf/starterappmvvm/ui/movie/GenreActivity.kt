@@ -1,5 +1,6 @@
-package com.fadlurahmanf.starterappmvvm.ui.genre
+package com.fadlurahmanf.starterappmvvm.ui.movie
 
+import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.fadlurahmanf.starterappmvvm.base.BaseActivity
@@ -7,14 +8,14 @@ import com.fadlurahmanf.starterappmvvm.base.BaseState
 import com.fadlurahmanf.starterappmvvm.data.response.movie.GenresResponse
 import com.fadlurahmanf.starterappmvvm.databinding.ActivityGenreBinding
 import com.fadlurahmanf.starterappmvvm.di.component.MovieComponent
-import com.fadlurahmanf.starterappmvvm.ui.genre.adapter.GenreAdapter
-import com.fadlurahmanf.starterappmvvm.ui.genre.viewmodel.GenreViewModel
+import com.fadlurahmanf.starterappmvvm.ui.movie.adapter.GenreAdapter
+import com.fadlurahmanf.starterappmvvm.ui.movie.viewmodel.MovieViewModel
 import javax.inject.Inject
 
 class GenreActivity : BaseActivity<ActivityGenreBinding>(ActivityGenreBinding::inflate) {
 
     @Inject
-    lateinit var viewModel:GenreViewModel
+    lateinit var viewModel:MovieViewModel
 
     override fun initSetup() {
         supportActionBar?.hide()
@@ -29,7 +30,9 @@ class GenreActivity : BaseActivity<ActivityGenreBinding>(ActivityGenreBinding::i
         adapter = GenreAdapter(genres)
         adapter.setCallBack(object : GenreAdapter.CallBack{
             override fun onClicked(genre: GenresResponse.Genre) {
-
+                val intent = Intent(this@GenreActivity, ListMovieActivity::class.java)
+                intent.putExtra(ListMovieActivity.GENRE, genre.name)
+                startActivity(intent)
             }
         })
         binding?.rvGenre?.layoutManager = GridLayoutManager(this, 2)
@@ -38,15 +41,15 @@ class GenreActivity : BaseActivity<ActivityGenreBinding>(ActivityGenreBinding::i
 
     private fun initObserver() {
         viewModel.state.observe(this){
-            if (it.state == BaseState.LOADING){
+            if (it.getGenreState == BaseState.LOADING){
                 binding?.pb?.visibility = View.VISIBLE
-            }else if (it.state == BaseState.SUCCESS){
+            }else if (it.getGenreState == BaseState.SUCCESS){
                 binding?.pb?.visibility = View.GONE
                 binding?.rvGenre?.visibility = View.VISIBLE
                 genres.clear()
                 genres.addAll(it.genreData?.genres?: arrayListOf())
                 adapter.notifyDataSetChanged()
-            }else if (it.state == BaseState.FAILED){
+            }else if (it.getGenreState == BaseState.FAILED){
                 binding?.pb?.visibility = View.GONE
                 if (binding?.root != null){
                     showSnackBar(binding!!.root, it.errorGenreData?:"")

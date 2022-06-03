@@ -19,10 +19,15 @@
         <activity
             android:name=".ui.example.activity.ExampleActivity"
             android:configChanges="orientation|screenSize" />
+        <activity android:name=".ui.movie.ListMovieActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar1"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.genre.GenreActivity"
+            android:name=".ui.movie.GenreActivity"
             android:exported="true"
-            android:theme="@style/NoActionBar1">
+            android:theme="@style/NoActionBar1"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

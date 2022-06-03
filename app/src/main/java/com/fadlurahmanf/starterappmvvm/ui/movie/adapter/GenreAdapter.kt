@@ -1,4 +1,4 @@
-package com.fadlurahmanf.starterappmvvm.ui.genre.adapter
+package com.fadlurahmanf.starterappmvvm.ui.movie.adapter
 
 import android.view.LayoutInflater
 import android.view.View

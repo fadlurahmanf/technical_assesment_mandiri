@@ -8,4 +8,9 @@
         <item name="colorPrimary">@color/navy_blue</item>
         <item name="colorSecondary">@color/navy_blue</item>
     </style>
+
+    <style name="ImageViewCorner20">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 </resources>
