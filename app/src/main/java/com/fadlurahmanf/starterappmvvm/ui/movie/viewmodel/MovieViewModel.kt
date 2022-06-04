@@ -104,6 +104,15 @@ class MovieViewModel @Inject constructor(
                 stateData.movieVideoState = BaseState.SUCCESS
                 stateData.movieVideoData = it
                 _state.postValue(stateData)
+            },
+            entity.getMovieReview(movieId, 1).doOnError {
+                stateData.reviewState = BaseState.FAILED
+                stateData.errorReview = it.message
+                _state.postValue(stateData)
+            }.doOnNext {
+                stateData.reviewState = BaseState.SUCCESS
+                stateData.reviewData = it
+                _state.postValue(stateData)
             }
         ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
             .subscribe(

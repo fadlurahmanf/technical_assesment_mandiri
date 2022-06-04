@@ -1,10 +1,7 @@
 package com.fadlurahmanf.starterappmvvm.ui.movie.viewmodel
 
 import com.fadlurahmanf.starterappmvvm.base.BaseState
-import com.fadlurahmanf.starterappmvvm.data.response.movie.DiscoverResponse
-import com.fadlurahmanf.starterappmvvm.data.response.movie.GenresResponse
-import com.fadlurahmanf.starterappmvvm.data.response.movie.MovieResponse
-import com.fadlurahmanf.starterappmvvm.data.response.movie.MovieVideoResponse
+import com.fadlurahmanf.starterappmvvm.data.response.movie.*
 
 data class MovieStateData(
     var getGenreState:BaseState ?= BaseState.IDLE,
@@ -21,5 +18,9 @@ data class MovieStateData(
 
     var movieVideoState:BaseState ?= BaseState.IDLE,
     var movieVideoData:MovieVideoResponse ?= null,
-    var errorMovieVideo:String ?= null
+    var errorMovieVideo:String ?= null,
+
+    var reviewState:BaseState ?= BaseState.IDLE,
+    var reviewData:ReviewResponse ?= null,
+    var errorReview:String ?= null
 )

@@ -16,4 +16,6 @@ class MovieEntity @Inject constructor() : AbstractNetwork<MovieApi>() {
     fun getDetailMovie(movieId:Int) = networkService(15).getMovieDetail(movieId)
 
     fun getMovieVideo(movieId: Int) = networkService(15).getMovieVideo(movieId)
+
+    fun getMovieReview(movieId: Int, page: Int) = networkService(15).getMovieReview(movieId, page)
 }

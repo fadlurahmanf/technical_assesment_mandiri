@@ -1,7 +1,5 @@
 package com.fadlurahmanf.starterappmvvm.ui.movie
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
 import com.fadlurahmanf.starterappmvvm.base.BaseActivity
@@ -9,8 +7,10 @@ import com.fadlurahmanf.starterappmvvm.base.BaseState
 import com.fadlurahmanf.starterappmvvm.data.response.movie.DiscoverResponse
 import com.fadlurahmanf.starterappmvvm.data.response.movie.MovieResponse
 import com.fadlurahmanf.starterappmvvm.data.response.movie.MovieVideoResponse
+import com.fadlurahmanf.starterappmvvm.data.response.movie.ReviewResponse
 import com.fadlurahmanf.starterappmvvm.databinding.ActivityDetailMovieBinding
 import com.fadlurahmanf.starterappmvvm.di.component.MovieComponent
+import com.fadlurahmanf.starterappmvvm.ui.movie.adapter.ReviewAdapter
 import com.fadlurahmanf.starterappmvvm.ui.movie.adapter.TrailerAdapter
 import com.fadlurahmanf.starterappmvvm.ui.movie.viewmodel.MovieViewModel
 import javax.inject.Inject
@@ -41,11 +41,17 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(ActivityDet
         }
     }
 
-    private lateinit var adapter:TrailerAdapter
+    private lateinit var trailerAdapter:TrailerAdapter
     private var movieVideos:ArrayList<MovieVideoResponse.Results> = arrayListOf()
+
+    private lateinit var reviewAdapter:ReviewAdapter
+    private var reviews:ArrayList<ReviewResponse.Results> = arrayListOf()
     private fun initAdapter(){
-        adapter = TrailerAdapter(movieVideos)
-        binding?.rvTrailer?.adapter = adapter
+        trailerAdapter = TrailerAdapter(movieVideos)
+        binding?.rvTrailer?.adapter = trailerAdapter
+
+        reviewAdapter = ReviewAdapter(reviews)
+        binding?.rvReview?.adapter = reviewAdapter
     }
 
     private fun initView() {
@@ -79,9 +85,20 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(ActivityDet
                 binding?.llTrailer?.visibility = View.VISIBLE
                 movieVideos.clear()
                 movieVideos.addAll(it.movieVideoData?.results?: arrayListOf())
-                adapter.notifyDataSetChanged()
+                trailerAdapter.notifyDataSetChanged()
             }else if (it.movieVideoState == BaseState.FAILED){
                 binding?.llTrailer?.visibility = View.GONE
+            }
+
+            if (it.reviewState == BaseState.LOADING){
+                binding?.llReview?.visibility = View.GONE
+            }else if (it.reviewState == BaseState.SUCCESS){
+                binding?.llReview?.visibility = View.VISIBLE
+                reviews.clear()
+                reviews.addAll(it.reviewData?.results?: arrayListOf())
+                reviewAdapter.notifyDataSetChanged()
+            }else if (it.reviewState == BaseState.FAILED){
+                binding?.llReview?.visibility = View.GONE
             }
         }
     }
