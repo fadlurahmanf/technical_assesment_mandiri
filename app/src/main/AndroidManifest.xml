@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fadlurahmanf.starterappmvvm">
+    package="com.technical_assessment.starterappmvvm">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,19 +14,26 @@
         android:theme="@style/Theme.StarterAppMvvm"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.movie.ListReviewActivity"
+            android:name=".ui.movie.YoutubeActivity"
             android:exported="false"
             android:theme="@style/NoActionBar1"/>
         <activity
+            android:name=".ui.movie.ListReviewActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar1"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.movie.DetailMovieActivity"
             android:exported="false"
-            android:theme="@style/NoActionBar1" />
+            android:theme="@style/NoActionBar1"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.SplashActivity"
             android:exported="false" />
         <activity
             android:name=".ui.example.activity.ExampleActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.movie.ListMovieActivity"
             android:exported="false"
@@ -44,5 +51,11 @@
             </intent-filter>
         </activity>
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
 
 </manifest>
