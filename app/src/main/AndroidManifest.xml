@@ -14,9 +14,13 @@
         android:theme="@style/Theme.StarterAppMvvm"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.movie.DetailMovieActivity"
+            android:name=".ui.movie.ListReviewActivity"
             android:exported="false"
             android:theme="@style/NoActionBar1"/>
+        <activity
+            android:name=".ui.movie.DetailMovieActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar1" />
         <activity
             android:name=".ui.SplashActivity"
             android:exported="false" />

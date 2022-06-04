@@ -125,4 +125,34 @@ class MovieViewModel @Inject constructor(
                 }
             ))
     }
+
+    fun getReview(movieId: Int, page: Int){
+        stateData.reviewState = BaseState.LOADING
+        _state.value = stateData
+        disposable().add(entity.getMovieReview(movieId, page)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    if (it.results != null){
+                        stateData.reviewState = BaseState.SUCCESS
+                        stateData.reviewData = it
+                        _state.value = stateData
+                    }else{
+                        stateData.reviewState = BaseState.FAILED
+                        stateData.errorReview = "There is no content here"
+                        _state.value = stateData
+                    }
+                },
+                {
+                    stateData.reviewState = BaseState.FAILED
+                    stateData.errorReview = it.message
+                    _state.value = stateData
+                },
+                {
+                    stateData.reviewState = BaseState.IDLE
+                    _state.value = stateData
+                }
+            ))
+    }
 }

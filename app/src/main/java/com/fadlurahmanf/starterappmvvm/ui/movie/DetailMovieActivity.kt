@@ -1,5 +1,6 @@
 package com.fadlurahmanf.starterappmvvm.ui.movie
 
+import android.content.Intent
 import android.view.View
 import com.bumptech.glide.Glide
 import com.fadlurahmanf.starterappmvvm.base.BaseActivity
@@ -32,12 +33,21 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(ActivityDet
         initAdapter()
         initView()
         initObserver()
+        initAction()
         if (result?.id != null){
             viewModel.getDetailMovie(result!!.id!!)
         }else{
             if (binding?.root != null){
                 showSnackBar(binding!!.root, "There is no content here")
             }
+        }
+    }
+
+    private fun initAction() {
+        binding?.tvSeeAll?.setOnClickListener {
+            val intent = Intent(this, ListReviewActivity::class.java)
+            intent.putExtra(ListReviewActivity.RESULT, result)
+            startActivity(intent)
         }
     }
 
@@ -50,7 +60,7 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(ActivityDet
         trailerAdapter = TrailerAdapter(movieVideos)
         binding?.rvTrailer?.adapter = trailerAdapter
 
-        reviewAdapter = ReviewAdapter(reviews)
+        reviewAdapter = ReviewAdapter(reviews, false)
         binding?.rvReview?.adapter = reviewAdapter
     }
 

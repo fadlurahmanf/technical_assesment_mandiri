@@ -91,7 +91,7 @@
                         android:paddingHorizontal="15dp"
                         android:text="Trailer"
                         android:textSize="20sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/navy_blue"
                         android:textStyle="bold"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                             android:paddingHorizontal="15dp"
                             android:text="Review"
                             android:textSize="20sp"
-                            android:textColor="@color/black"
+                            android:textColor="@color/navy_blue"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
                             android:id="@+id/tv_see_all"
                             android:text="See all"
                             android:textSize="20sp"
-                            android:textColor="@color/black"
+                            android:textColor="@color/navy_blue"
                             android:textStyle="bold"/>
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
