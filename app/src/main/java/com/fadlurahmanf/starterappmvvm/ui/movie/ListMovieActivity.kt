@@ -1,5 +1,6 @@
 package com.fadlurahmanf.starterappmvvm.ui.movie
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -51,6 +52,13 @@ class ListMovieActivity : BaseActivity<ActivityListMovieBinding>(ActivityListMov
     private var listResult:ArrayList<DiscoverResponse.Result> = arrayListOf()
     private fun initAdapter() {
         adapter = MovieAdapter(listResult)
+        adapter.setCallBack(object : MovieAdapter.CallBack{
+            override fun onClicked(result: DiscoverResponse.Result) {
+                val intent = Intent(this@ListMovieActivity, DetailMovieActivity::class.java)
+                intent.putExtra(DetailMovieActivity.RESULT, result)
+                startActivity(intent)
+            }
+        })
         gridLayoutManager = GridLayoutManager(this, 2)
         binding?.rvMovie?.layoutManager = gridLayoutManager
         binding?.rvMovie?.adapter = adapter

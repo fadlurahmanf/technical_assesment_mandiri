@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/tffaj/AndroidStudioProjects/Kotlin/CLONE/starter_app_mvvm-mvvm2/app/src/main/res/drawable/gradient_blue.xml" value="0.179" />
+        <entry key="..\:/Users/tffaj/AndroidStudioProjects/Kotlin/CLONE/starter_app_mvvm-mvvm2/app/src/main/res/layout/activity_detail_movie.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/tffaj/AndroidStudioProjects/Kotlin/CLONE/starter_app_mvvm-mvvm2/app/src/main/res/layout/activity_genre.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/tffaj/AndroidStudioProjects/Kotlin/CLONE/starter_app_mvvm-mvvm2/app/src/main/res/layout/activity_list_movie.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/tffaj/AndroidStudioProjects/Kotlin/CLONE/starter_app_mvvm-mvvm2/app/src/main/res/layout/item_genre.xml" value="0.2796296296296296" />
         <entry key="..\:/Users/tffaj/AndroidStudioProjects/Kotlin/CLONE/starter_app_mvvm-mvvm2/app/src/main/res/layout/item_movie.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/tffaj/AndroidStudioProjects/Kotlin/CLONE/starter_app_mvvm-mvvm2/app/src/main/res/layout/item_trailer.xml" value="0.33" />
       </map>
     </option>
   </component>

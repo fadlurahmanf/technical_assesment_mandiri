@@ -3,6 +3,7 @@ package com.fadlurahmanf.starterappmvvm.data.api.movie
 import com.fadlurahmanf.starterappmvvm.data.response.movie.DiscoverResponse
 import com.fadlurahmanf.starterappmvvm.data.response.movie.GenresResponse
 import com.fadlurahmanf.starterappmvvm.data.response.movie.MovieResponse
+import com.fadlurahmanf.starterappmvvm.data.response.movie.MovieVideoResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -25,8 +26,8 @@ interface MovieApi {
         @Path("movie_id") movieId:Int
     ) : Observable<MovieResponse>
 
-//    @GET("movie/{movie_id}/videos")
-//    fun getMovieVideo(
-//
-//    ) : Observable<>
+    @GET("movie/{movie_id}/videos")
+    fun getMovieVideo(
+        @Path("movie_id") movieId:Int
+    ) : Observable<MovieVideoResponse>
 }

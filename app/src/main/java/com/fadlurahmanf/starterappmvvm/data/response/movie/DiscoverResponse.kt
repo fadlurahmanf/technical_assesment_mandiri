@@ -1,14 +1,18 @@
 package com.fadlurahmanf.starterappmvvm.data.response.movie
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class DiscoverResponse(
     @SerializedName("page")
     var page:Int ?= null,
     @SerializedName("results"       ) var results      : ArrayList<Result>? = null,
     @SerializedName("total_pages"   ) var totalPages   : Int?               = null,
     @SerializedName("total_results" ) var totalResults : Int?               = null
-){
+) : Parcelable{
+    @Parcelize
     data class Result(
         @SerializedName("adult"             ) var adult            : Boolean?       = null,
         @SerializedName("backdrop_path"     ) var backdropPath     : String?        = null,
@@ -24,5 +28,5 @@ data class DiscoverResponse(
         @SerializedName("video"             ) var video            : Boolean?       = null,
         @SerializedName("vote_average"      ) var voteAverage      : Double?        = null,
         @SerializedName("vote_count"        ) var voteCount        : Int?           = null
-    )
+    ) : Parcelable
 }

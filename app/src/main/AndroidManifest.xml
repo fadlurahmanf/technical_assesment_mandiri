@@ -14,20 +14,25 @@
         android:theme="@style/Theme.StarterAppMvvm"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.movie.DetailMovieActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar1"/>
+        <activity
             android:name=".ui.SplashActivity"
             android:exported="false" />
         <activity
             android:name=".ui.example.activity.ExampleActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".ui.movie.ListMovieActivity"
+        <activity
+            android:name=".ui.movie.ListMovieActivity"
             android:exported="false"
-            android:theme="@style/NoActionBar1"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar1" />
         <activity
             android:name=".ui.movie.GenreActivity"
             android:exported="true"
-            android:theme="@style/NoActionBar1"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
