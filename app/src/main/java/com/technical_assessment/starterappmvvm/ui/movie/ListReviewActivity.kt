@@ -60,9 +60,11 @@ class ListReviewActivity : BaseActivity<ActivityListReviewBinding>(ActivityListR
                 if (page == 1){
                     binding?.pb?.visibility = View.VISIBLE
                     binding?.pbPagination?.visibility = View.GONE
+                    binding?.tvError?.visibility = View.GONE
                 }else{
                     binding?.pbPagination?.visibility = View.VISIBLE
                     binding?.pb?.visibility = View.GONE
+                    binding?.tvError?.visibility = View.GONE
                 }
             }else if (it.reviewState == BaseState.SUCCESS){
                 isLoading = false
@@ -76,6 +78,12 @@ class ListReviewActivity : BaseActivity<ActivityListReviewBinding>(ActivityListR
                 isLoading = false
                 binding?.pb?.visibility = View.GONE
                 binding?.pbPagination?.visibility = View.GONE
+                if (page == 1){
+                    binding?.tvError?.text = it.errorReview
+                    binding?.tvError?.visibility = View.VISIBLE
+                }else{
+                    binding?.tvError?.visibility = View.GONE
+                }
                 showSnackBar(binding!!.root, it.errorReview?:"")
             }
         }

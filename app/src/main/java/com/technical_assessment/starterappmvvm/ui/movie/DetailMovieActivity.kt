@@ -84,25 +84,33 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(ActivityDet
             if (it.detailMovieState == BaseState.LOADING){
                 binding?.pb?.visibility = View.VISIBLE
                 binding?.llMain?.visibility = View.GONE
+                binding?.tvError?.visibility = View.GONE
             }else if (it.detailMovieState == BaseState.SUCCESS){
                 movie = it.detailMovieData
                 binding?.pb?.visibility = View.GONE
                 binding?.llMain?.visibility = View.VISIBLE
                 binding?.tvMovieTitle?.text = movie?.title ?: ""
                 binding?.tvMovieDescription?.text = movie?.overview ?: ""
+                binding?.tvError?.visibility = View.GONE
             }else if (it.detailMovieState == BaseState.FAILED){
                 binding?.pb?.visibility = View.GONE
                 binding?.llMain?.visibility = View.GONE
+                binding?.tvError?.text = it.errorDetailMovie?:""
+                binding?.tvError?.visibility = View.VISIBLE
                 showSnackBar(binding!!.root, it.errorDetailMovie?:"")
             }
 
             if (it.movieVideoState == BaseState.LOADING){
                 binding?.llTrailer?.visibility = View.GONE
             }else if (it.movieVideoState == BaseState.SUCCESS){
-                binding?.llTrailer?.visibility = View.VISIBLE
                 movieVideos.clear()
                 movieVideos.addAll(it.movieVideoData?.results?: arrayListOf())
                 trailerAdapter.notifyDataSetChanged()
+                if (movieVideos.isNotEmpty()){
+                    binding?.llTrailer?.visibility = View.VISIBLE
+                }else{
+                    binding?.llTrailer?.visibility = View.GONE
+                }
             }else if (it.movieVideoState == BaseState.FAILED){
                 binding?.llTrailer?.visibility = View.GONE
             }
@@ -110,10 +118,14 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(ActivityDet
             if (it.reviewState == BaseState.LOADING){
                 binding?.llReview?.visibility = View.GONE
             }else if (it.reviewState == BaseState.SUCCESS){
-                binding?.llReview?.visibility = View.VISIBLE
                 reviews.clear()
                 reviews.addAll(it.reviewData?.results?: arrayListOf())
                 reviewAdapter.notifyDataSetChanged()
+                if (reviews.isNotEmpty()){
+                    binding?.llReview?.visibility = View.VISIBLE
+                }else{
+                    binding?.llReview?.visibility = View.GONE
+                }
             }else if (it.reviewState == BaseState.FAILED){
                 binding?.llReview?.visibility = View.GONE
             }

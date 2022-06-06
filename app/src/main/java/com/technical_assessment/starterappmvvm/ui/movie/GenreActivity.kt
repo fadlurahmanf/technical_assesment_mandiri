@@ -43,14 +43,19 @@ class GenreActivity : BaseActivity<ActivityGenreBinding>(ActivityGenreBinding::i
         viewModel.state.observe(this){
             if (it.getGenreState == BaseState.LOADING){
                 binding?.pb?.visibility = View.VISIBLE
+                binding?.tvError?.visibility = View.GONE
             }else if (it.getGenreState == BaseState.SUCCESS){
                 binding?.pb?.visibility = View.GONE
                 binding?.rvGenre?.visibility = View.VISIBLE
+                binding?.tvError?.visibility = View.GONE
                 genres.clear()
                 genres.addAll(it.genreData?.genres?: arrayListOf())
                 adapter.notifyDataSetChanged()
             }else if (it.getGenreState == BaseState.FAILED){
                 binding?.pb?.visibility = View.GONE
+                binding?.rvGenre?.visibility = View.GONE
+                binding?.tvError?.visibility = View.VISIBLE
+                binding?.tvError?.text = it.errorGenreData?:""
                 if (binding?.root != null){
                     showSnackBar(binding!!.root, it.errorGenreData?:"")
                 }

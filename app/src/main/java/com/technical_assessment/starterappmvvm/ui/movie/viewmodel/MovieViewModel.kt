@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import com.technical_assessment.starterappmvvm.base.BaseState
 import com.technical_assessment.starterappmvvm.base.BaseViewModel
 import com.technical_assessment.starterappmvvm.data.entity.movie.MovieEntity
+import com.technical_assessment.starterappmvvm.data.response.movie.MovieResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableSource
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -91,7 +93,8 @@ class MovieViewModel @Inject constructor(
                 stateData.detailMovieState = BaseState.SUCCESS
                 stateData.detailMovieData = it
                 _state.postValue(stateData)
-            },
+            }.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()),
             entity.getMovieVideo(movieId).doOnError {
                 stateData.movieVideoState = BaseState.FAILED
                 stateData.errorMovieVideo = it.message
@@ -109,15 +112,20 @@ class MovieViewModel @Inject constructor(
                 stateData.reviewState = BaseState.SUCCESS
                 stateData.reviewData = it
                 _state.postValue(stateData)
-            }
+            }.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
         ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {},
-                {},
+                {
+                    stateData.detailMovieState = BaseState.FAILED
+                    stateData.errorDetailMovie = it.message
+                    _state.postValue(stateData)
+                },
                 {
                     stateData.detailMovieState = BaseState.IDLE
                     stateData.movieVideoState = BaseState.IDLE
-                    _state.value = stateData
+                    _state.postValue(stateData)
                 }
             ))
     }

@@ -23,7 +23,7 @@ abstract class BaseNetwork<T>() {
     open fun okHttpClientBuilder(builder: OkHttpClient.Builder): OkHttpClient.Builder{
         return builder.addInterceptor(loggingInterceptor())
             .addInterceptor(QueryInterceptor())
-            .addInterceptor(ContentTypeInterceptor())
+//            .addInterceptor(ContentTypeInterceptor())
     }
 
     private fun provideClient(timeOut: Long): OkHttpClient {

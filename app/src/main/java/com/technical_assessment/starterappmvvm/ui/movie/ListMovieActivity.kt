@@ -77,9 +77,11 @@ class ListMovieActivity : BaseActivity<ActivityListMovieBinding>(ActivityListMov
                 if (page == 1){
                     binding?.pb?.visibility = View.VISIBLE
                     binding?.pbPagination?.visibility = View.GONE
+                    binding?.tvError?.visibility = View.GONE
                 }else{
                     binding?.pb?.visibility = View.GONE
                     binding?.pbPagination?.visibility = View.VISIBLE
+                    binding?.tvError?.visibility = View.GONE
                 }
             } else if (it.getDiscoverState == BaseState.SUCCESS){
                 isLoading = false
@@ -93,7 +95,14 @@ class ListMovieActivity : BaseActivity<ActivityListMovieBinding>(ActivityListMov
             }else if (it.getDiscoverState == BaseState.FAILED){
                 binding?.pb?.visibility = View.GONE
                 binding?.pbPagination?.visibility = View.GONE
+                if (page == 1){
+                    binding?.tvError?.text = it.errorDiscoverData?:""
+                    binding?.tvError?.visibility = View.VISIBLE
+                }else{
+                    binding?.tvError?.visibility = View.GONE
+                }
                 isLoading = false
+                showSnackBar(binding!!.root, it.errorDiscoverData?:"")
             }
         }
     }
